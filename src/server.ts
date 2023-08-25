@@ -21,7 +21,7 @@ sequelize.sync().then(() => {
     app.listen(PORT, () => {
         console.log(`Server Listening on port ${PORT}`);
     });
-}).catch((error) => {
+}).catch((error:any) => {
     console.error('Database connection error:', error);
 });
 
