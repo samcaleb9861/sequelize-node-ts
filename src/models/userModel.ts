@@ -1,5 +1,6 @@
 import {DataTypes,Model,Optional} from 'sequelize';
 import sequelize from '../db/connect';
+import Order from './orderModel'
 
 interface UserAttributes{
     id:number;
@@ -13,6 +14,7 @@ class User extends Model<UserAttributes,UserCreationAttributes> implements UserA
     public id!:number;
     public username!:string;
     public email!:string;
+    public readonly orders?: Order[];
 }
 User.init(
     {
@@ -33,8 +35,10 @@ User.init(
         },
         {
             sequelize,
+            tableName: 'users',
             modelName: 'User',
         }
 );
+User.hasMany(Order,{foreignKey:'userId'})
 
 export default User;
